@@ -271,7 +271,6 @@ function teleport(pos) {
 
 // TODO Command ideas:
 // - NoClip
-// - HClip
 // - AutoBloom
 // - Affectionmaxxer
 // - Bunnyhop
@@ -288,11 +287,17 @@ gameState.trySendChat = function (msg) {
 	if (msg.startsWith("!")) {
 		var cmd = msg.substring(1).split(" ");
 		switch (cmd[0]) {
+			case "hclip":
+				var clipds = Number.parseFloat(cmd[1] || "0.5");
+				gameState.playerContainer.position.x += Math.sin(gameState.playerContainer.rotation.y) * clipds;
+				gameState.playerContainer.position.z += Math.cos(gameState.playerContainer.rotation.y) * clipds;
+				chatLog("Clipped forward " + clipds + " units.");
+				break;
 			case "target":
 				var trg = ENTITIES[cmd[1]?.toLowerCase()];
 				if (!trg) {
 					chatLog("That entity doesn't exist!");
-					chatLog("Available entities: beastfolk, wind, breeze, toad.");
+					chatLog("Available entities: forest_fairy, dew_fairy, sprout_fairy, beastfolk, wind, breeze, toad.");
 					return;
 				}
 
@@ -321,6 +326,7 @@ gameState.trySendChat = function (msg) {
 				break;
 			case "pumpkin":
 				// TODO: Doesn't send affection update queries
+				lunPersistentAnimstate = 0;
 				gameState.sendEmoteNow(EMOTES.PumpkinJoayo);
 				chatLog("Joayo!");
 				break;
@@ -352,7 +358,7 @@ gameState.trySendChat = function (msg) {
 				break;
 			default:
 				chatLog("Unknown command: " + cmd[0]);
-				chatLog("Available commands: target, mass-inv, players, speed, pumpkin, shop, dance, portal");
+				chatLog("Available commands: hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
 				break;
 		}
 		return;
