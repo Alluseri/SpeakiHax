@@ -69,10 +69,10 @@ var hxExpTrackerSpeed = 0;
 var hxStatusScreen = document.createElement("span");
 hxStatusScreen.style.position = "absolute";
 hxStatusScreen.style.top = "325px";
-hxStatusScreen.style.left = "325px";
+hxStatusScreen.style.left = "0px";
 hxStatusScreen.style.zIndex = "500000";
 hxStatusScreen.style.color = "#F00";
-hxStatusScreen.innerText = "SpeakiHax OFF";
+hxStatusScreen.innerText = "SpeakiBot OFF";
 document.body.appendChild(hxStatusScreen);
 
 function getAllEntities() {
@@ -173,7 +173,7 @@ function botTick() {
 
 	const playerExp = gameState.myStat.exp;
 
-	hxStatusScreen.innerText = "SpeakiHax Status: " + hxBotState;
+	hxStatusScreen.innerText = "SpeakiBot Status: " + hxBotState;
 	hxStatusScreen.innerText += "\nEXP: " + playerExp + "/" + gameState.myStat.maxExp;
 	hxStatusScreen.innerText += "\nTicks: " + hxTickCount;
 
@@ -274,6 +274,7 @@ function teleport(pos) {
 // - AutoBloom
 // - Affectionmaxxer
 // - Bunnyhop
+// - Mass add friends
 
 var hxSpeedMultiplier = 1;
 
@@ -338,7 +339,7 @@ gameState.trySendChat = function (msg) {
 				if (!lunPersistentAnimstate) {
 					lunPersistentAnimstate = EMOTES.Dance;
 					gameState.sendEmoteNow(EMOTES.Dance);
-					chatLog("Dancing!");
+					chatLog("Dancing! Do '!dance' again to stop dancing.");
 				} else {
 					lunPersistentAnimstate = 0;
 					chatLog("Stopped dancing!");
@@ -385,10 +386,10 @@ gameState.combatAssist.update = function (e) {
 }
 
 var HAX_LOOP = setInterval(tick, 50);
-var BOT_LOOP = setInterval(botTick, 50);
+// var BOT_LOOP = setInterval(botTick, 50);
 
 function killBot() {
-	hxStatusScreen.innerText = "SpeakiHax OFF";
+	hxStatusScreen.innerText = "SpeakiBot OFF";
 	clearInterval(BOT_LOOP);
 	BOT_LOOP = 0;
 }
@@ -397,7 +398,7 @@ hxStatusScreen.onclick = () => {
 	if (BOT_LOOP) {
 		killBot();
 	} else {
-		hxStatusScreen.innerText = "Trying to restart SpeakiHax...";
+		hxStatusScreen.innerText = "Trying to restart SpeakiBot...";
 		hxBotState = 0;
 		BOT_LOOP = setInterval(botTick, 50);
 	}
