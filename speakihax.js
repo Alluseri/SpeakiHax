@@ -1,4 +1,7 @@
 const ENTITIES = {
+	forest_fairy: "숲의 요정", // l1
+	dew_fairy: "이슬 요정", // l3
+	sprout_fairy: "새싹 요정", // l5
 	beastfolk: "숲 수인 정찰병",
 	wind: "떠도는 바람정령",
 	breeze: "산들 바람정령",
@@ -31,9 +34,10 @@ const EMOTES = {
 	Dance: 8
 };
 
+// TODO: Check skill availability
 // RangeM is hardcoded from Dl declarations
 const SKILL_SLOT_ORDER = [
-	{
+	/*{
 		// `잉걸 화구`
 		index: 2,
 		rangeM: 5
@@ -42,7 +46,7 @@ const SKILL_SLOT_ORDER = [
 		// `뿌리 내려찍기`
 		index: 1,
 		rangeM: 4
-	}, {
+	},*/ {
 		// `별빛 섬광`
 		index: 0,
 		rangeM: 3
@@ -81,7 +85,7 @@ function attackEntity(ent) {
 
 	gameState.combatAssist.reset();
 
-	if (getHP(ent) == ent.info.maxHp && hxTickCount >= hxNextCastTickCount) {
+	if (SKILL_SLOT_ORDER.length && getHP(ent) == ent.info.maxHp && hxTickCount >= hxNextCastTickCount) {
 		// Only when have oneshot potential
 		// TODO: Logic not exactly perfect, there are cases where skill can oneshot but basic attack can't
 		for (let ord of SKILL_SLOT_ORDER) {
@@ -167,10 +171,10 @@ function tick() {
 		hxStatusScreen.innerText += "\nTargeting enemy: " + getEntityId(hxCurrentlyTargeting) + " (" + getHP(hxCurrentlyTargeting) + " HP, " + distanceTo(hxCurrentlyTargeting).toFixed(3) + "m away)";
 	}
 
-	if (hxTickCount++ % 20 == 0) {
+	/*if (hxTickCount++ % 20 == 0) {
 		gameState.bloomEffects.spawnHearts(gameState.playerContainer);
 		gameState.sendEmoteNow(EMOTES.StrokeBloom);
-	}
+	}*/
 
 	if (hxExpTrackerStartExp > playerExp || hxTickCount >= hxExpTrackerNextTicks) {
 		// in seconds
@@ -189,11 +193,11 @@ function tick() {
 	// TODO: Actively try to find better targets
 	switch (hxBotState) {
 		case BOT_STATES.Farming:
-			if (getPlayerHP() < 90) {
+			if (getPlayerHP() < 20) {
 				hxBotState = BOT_STATES.Retreating;
 				hxCurrentlyTargeting = null;
 				return;
-			} else if (getPlayerHP() < 320 && gameState.potionSlot.getRemainingCooldownMs() <= 0) {
+			} else if (getPlayerHP() < 90 && gameState.potionSlot.getRemainingCooldownMs() <= 0) {
 				gameState.tryUsePotion();
 			}
 
@@ -267,7 +271,7 @@ gameState.trySendChat = function (msg) {
 		var cmd = msg.substring(1).split(" ");
 		switch (cmd[0]) {
 			case "target":
-				var trg = ENTITIES[cmd[1]?.toLower()];
+				var trg = ENTITIES[cmd[1]?.toLowerCase()];
 				if (!trg) {
 					chatLog("That entity doesn't exist!");
 					chatLog("Available entities: beastfolk, wind, breeze, toad.");
