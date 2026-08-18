@@ -270,7 +270,6 @@ function teleport(pos) {
 }
 
 // TODO Command ideas:
-// - NoClip
 // - AutoBloom
 // - Affectionmaxxer
 // - Bunnyhop
@@ -288,6 +287,13 @@ gameState.trySendChat = function (msg) {
 	if (msg.startsWith("!")) {
 		var cmd = msg.substring(1).split(" ");
 		switch (cmd[0]) {
+			case "noclip":
+				gameState.scenery.staticCollidersList = [];
+				gameState.pumpkinManager.getColliders = () => [];
+				gameState.monsters.buildColliders = () => [];
+
+				chatLog("NoClip enabled. Enter the portal or move to a differnt town to go back to normal.");
+				break;
 			case "zoom":
 				if (!cmd[1]) {
 					chatLog("Usage: !zoom [number]");
@@ -295,7 +301,7 @@ gameState.trySendChat = function (msg) {
 					return;
 				}
 
-				gameState.cameraController.cameraZoomDistance = Number.parseInt(cmd[1]) || 12;
+				chatLog("Set camera zoom to " + (gameState.cameraController.cameraZoomDistance = Number.parseInt(cmd[1]) || 12) + "!");
 				break;
 			case "hclip":
 				var clipds = Number.parseFloat(cmd[1] || "0.5");
@@ -368,7 +374,7 @@ gameState.trySendChat = function (msg) {
 				break;
 			default:
 				chatLog("Unknown command: " + cmd[0]);
-				chatLog("Available commands: zoom, hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
+				chatLog("Available commands: noclip, zoom, hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
 				break;
 		}
 		return;
