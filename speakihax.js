@@ -288,6 +288,15 @@ gameState.trySendChat = function (msg) {
 	if (msg.startsWith("!")) {
 		var cmd = msg.substring(1).split(" ");
 		switch (cmd[0]) {
+			case "zoom":
+				if (!cmd[1]) {
+					chatLog("Usage: !zoom [number]");
+					chatLog("Legitimate values range from 3 to 12. Higher value = farther camera.");
+					return;
+				}
+
+				gameState.cameraController.cameraZoomDistance = Number.parseInt(cmd[1]) || 12;
+				break;
 			case "hclip":
 				var clipds = Number.parseFloat(cmd[1] || "0.5");
 				gameState.playerContainer.position.x += Math.sin(gameState.playerContainer.rotation.y) * clipds;
@@ -359,7 +368,7 @@ gameState.trySendChat = function (msg) {
 				break;
 			default:
 				chatLog("Unknown command: " + cmd[0]);
-				chatLog("Available commands: hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
+				chatLog("Available commands: zoom, hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
 				break;
 		}
 		return;
@@ -384,6 +393,8 @@ gameState.combatAssist.update = function (e) {
 
 	return hkCombatAssistUpdate(e);
 }
+
+gameState.cameraController.getObstacles = () => [];
 
 var HAX_LOOP = setInterval(tick, 50);
 var BOT_LOOP;
