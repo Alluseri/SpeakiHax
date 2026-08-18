@@ -16,3 +16,6 @@ And you can dance in the lobby!
 
 ## Maintenance
 idk, maybe I'll do some minor changes but this is basically feature complete:tm:
+
+<img src="https://media1.tenor.com/m/YwaDkCSg1AYAAAAd/israel-human.gif">
+only goyim will grind manually when botting is an option
