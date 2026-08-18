@@ -386,6 +386,7 @@ gameState.combatAssist.update = function (e) {
 }
 
 var HAX_LOOP = setInterval(tick, 50);
+var BOT_LOOP;
 // var BOT_LOOP = setInterval(botTick, 50);
 
 function killBot() {
