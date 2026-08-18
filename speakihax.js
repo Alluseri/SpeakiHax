@@ -7,7 +7,7 @@ const ENTITIES = {
 	breeze: "산들 바람정령",
 	toad: "이끼등 두꺼비"
 };
-var TARGET_ENTITY = ENTITIES.toad;
+var TARGET_ENTITY = ENTITIES.forest_fairy;
 const PORTAL_POS_LVL0 = {
 	x: 95,
 	y: 0,
@@ -157,6 +157,8 @@ function getPlayerHP() {
 }
 
 function tick() {
+	hxTickCount++;
+
 	const playerExp = gameState.myStat.exp;
 
 	hxStatusScreen.innerText = "SpeakiHax Status: " + hxBotState;
@@ -171,7 +173,7 @@ function tick() {
 		hxStatusScreen.innerText += "\nTargeting enemy: " + getEntityId(hxCurrentlyTargeting) + " (" + getHP(hxCurrentlyTargeting) + " HP, " + distanceTo(hxCurrentlyTargeting).toFixed(3) + "m away)";
 	}
 
-	/*if (hxTickCount++ % 20 == 0) {
+	/*if (hxTickCount % 20 == 0) {
 		gameState.bloomEffects.spawnHearts(gameState.playerContainer);
 		gameState.sendEmoteNow(EMOTES.StrokeBloom);
 	}*/
