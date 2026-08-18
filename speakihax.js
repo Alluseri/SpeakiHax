@@ -58,6 +58,9 @@ var hxCurrentlyTargeting = null;
 var hxTickCount = 0;
 var hxNextCastTickCount = 0;
 
+var lunTickCount = 0;
+var lunPersistentAnimstate = 0;
+
 var hxExpTrackerWindow = 60000 / 50;
 var hxExpTrackerNextTicks = 0;
 var hxExpTrackerStartExp = 0;
@@ -157,6 +160,15 @@ function getPlayerHP() {
 }
 
 function tick() {
+	lunTickCount++;
+
+	// idk how this shit works tbh but just in case new players don't correctly receive old emotes (I haven't bothered checking on an alt)
+	if (lunPersistentAnimstate && lunTickCount % (20 * 6) == 0) {
+		gameState.sendEmoteNow(EMOTES.Dance);
+	}
+}
+
+function botTick() {
 	hxTickCount++;
 
 	const playerExp = gameState.myStat.exp;
@@ -259,6 +271,10 @@ function teleport(pos) {
 
 // TODO Command ideas:
 // - NoClip
+// - HClip
+// - AutoBloom
+// - Affectionmaxxer
+// - Bunnyhop
 
 var hxSpeedMultiplier = 1;
 
@@ -304,6 +320,7 @@ gameState.trySendChat = function (msg) {
 				chatLog("New speed multiplier: " + (hxSpeedMultiplier = Number.parseFloat(cmd[1])) + ".");
 				break;
 			case "pumpkin":
+				// TODO: Doesn't send affection update queries
 				gameState.sendEmoteNow(EMOTES.PumpkinJoayo);
 				chatLog("Joayo!");
 				break;
@@ -312,8 +329,14 @@ gameState.trySendChat = function (msg) {
 				chatLog("Opened the shop!");
 				break;
 			case "dance":
-				gameState.sendEmoteNow(EMOTES.Dance);
-				chatLog("Dancing!");
+				if (!lunPersistentAnimstate) {
+					lunPersistentAnimstate = EMOTES.Dance;
+					gameState.sendEmoteNow(EMOTES.Dance);
+					chatLog("Dancing!");
+				} else {
+					lunPersistentAnimstate = 0;
+					chatLog("Stopped dancing!");
+				}
 				break;
 			case "portal":
 				switch (cmd[1]) {
@@ -355,7 +378,8 @@ gameState.combatAssist.update = function (e) {
 	return hkCombatAssistUpdate(e);
 }
 
-var BOT_LOOP = setInterval(tick, 50);
+var HAX_LOOP = setInterval(tick, 50);
+var BOT_LOOP = setInterval(botTick, 50);
 
 function killBot() {
 	hxStatusScreen.innerText = "SpeakiHax OFF";
@@ -369,7 +393,7 @@ hxStatusScreen.onclick = () => {
 	} else {
 		hxStatusScreen.innerText = "Trying to restart SpeakiHax...";
 		hxBotState = 0;
-		BOT_LOOP = setInterval(tick, 50);
+		BOT_LOOP = setInterval(botTick, 50);
 	}
 };
 
