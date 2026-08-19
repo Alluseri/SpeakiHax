@@ -371,9 +371,11 @@ gameState.trySendChat = function (msg) {
 				cmd[1] ||= "1";
 				chatLog("New speed multiplier: " + (hxSpeedMultiplier = Number.parseFloat(cmd[1])) + ".");
 				break;
-			case "pumpkin":
-				// TODO: Doesn't send affection update queries
-				lunPersistentAnimstate = 0;
+			case "joayo":
+			case "cuayo":
+			case "chuwayo":
+			case "chuayo":
+			case "juayo":
 				gameState.sendEmoteNow(EMOTES.PumpkinJoayo);
 				chatLog("Joayo!");
 				break;
