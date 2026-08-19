@@ -35,6 +35,11 @@ This list is not exhaustive, see **Available Commands** for the full list of fea
 - (BROKEN) `!portal (level)` - teleport to a portal
 
 ## Injection Guide
+> [!CAUTION]
+> The script has been reported **not to work correctly on Firefox**. You can still inject it, but commands may not work!
+> 
+> Also, don't inject this on your main account, obviously.
+
 1. Open Speaki RPG
 2. Do Ctrl+Shift+I to open DevTools
 3. Navigate to the "Sources" tab ("Debugger" tab in Mozilla Firefox)
