@@ -28,7 +28,7 @@ This list is not exhaustive, see **Available Commands** for the full list of fea
 - `!target [entity]` - set the target mob for SpeakiBot (do `!target` to get the list of available mobs)
 - `!players` - log all players, their levels & IDs to chat
 - `!speed (speed)` - change your movement speed (`1` is the default value)
-- `!pumpkin` - start farming pumpkin patch **(may be broken)**
+- `!joayo` - say joayo (also pretends like you're farming pumpkin patches, but that's fake and doesn't actually count towards anything)
 - `!shop` - open the Ner shop (should work in Monatium as well, but not tested)
 - `!dance` - start dancing (normally not possible in lobby, this command doesn't require you to have any item)
 - (BROKEN) `!mass-inv (level threshold)` - invite all players in render distance to party (if an argument is specified, only invite players under the specified level threshold)
