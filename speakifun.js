@@ -14,7 +14,8 @@ const Actions = {
 	Follow: 1,
 	Ritual: 2,
 	Dance: 3,
-	Cry: 4
+	Cry: 4,
+	Joayo: 5
 };
 
 // TODO: Can both be used at once?
@@ -72,7 +73,7 @@ var lunMoveTarget = null;
 var lunTickCount = 0;
 var lunSpeedMultiplier = 1;
 
-clearInterval(FUN_LOOP);
+// clearInterval(FUN_LOOP);
 function tick() {
 	lunTickCount++;
 
@@ -92,6 +93,12 @@ function tick() {
 		case Actions.Dance:
 			if (lunTickCount > sec(20)) {
 				gameState.sendEmoteNow(Emotes.Dance);
+				lunTickCount = 0;
+			}
+			break;
+		case Actions.Joayo:
+			if (lunTickCount > sec(20)) {
+				gameState.sendEmoteNow(Emotes.PumpkinJoayo);
 				lunTickCount = 0;
 			}
 			break;
@@ -169,7 +176,7 @@ gameState.handleChat = function (obm) {
 	var msg = obm.text;
 
 	lunMoveTarget = null;
-	lunTickCount = 0;
+	lunTickCount = 0; // This breaks #ritual when doing #pat or #jump
 
 	switch (msg) {
 		case "#stop":
@@ -181,6 +188,7 @@ gameState.handleChat = function (obm) {
 			lunTargetPlayer = playerId;
 			break;
 		case "#dance":
+			lunTickCount = 999999999;
 			lunAction = Actions.Dance;
 			lunSecondary = SecondaryActions.None;
 			break;
@@ -191,7 +199,15 @@ gameState.handleChat = function (obm) {
 			lunSecondary = SecondaryActions.Jump;
 			break;
 		case "#cry":
+			lunTickCount = 999999999;
 			lunAction = Actions.Cry;
+			lunSecondary = SecondaryActions.None;
+			break;
+		case "#juayo":
+		case "#chowayo":
+		case "#joayo":
+			lunTickCount = 999999999;
+			lunAction = Actions.Joayo;
 			lunSecondary = SecondaryActions.None;
 			break;
 		case "#ritual":
