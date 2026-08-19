@@ -269,12 +269,15 @@ function teleport(pos) {
 	gameState.playerContainer.position.z = pos.z;
 }
 
+// TODO: Better HUD system
 // TODO Command ideas:
 // - AutoBloom
 // - Affectionmaxxer
 // - Bunnyhop
 // - Mass add friends
+// - Unhook
 
+var hxCameraLocked = false;
 var hxSpeedMultiplier = 1;
 
 var hkUpdate = gameState.update.bind(gameState);
@@ -282,17 +285,45 @@ gameState.update = function (moveSpeed, t, n) {
 	return hkUpdate(moveSpeed * hxSpeedMultiplier, t, n);
 }
 
+var hkComputeCameraTargetPosition = gameState.cameraController.computeCameraTargetPosition.bind(gameState.cameraController);
+gameState.cameraController.computeCameraTargetPosition = function (pos) {
+	if (!hxCameraLocked)
+		return hkComputeCameraTargetPosition(pos);
+}
+
 var hkTrySendChat = gameState.trySendChat.bind(gameState);
 gameState.trySendChat = function (msg) {
 	if (msg.startsWith("!")) {
 		var cmd = msg.substring(1).split(" ");
 		switch (cmd[0]) {
+			case "ghost":
+				// TODO: Wipe all SpeakiHax chat messages
+				hxStatusScreen.style.display = hxStatusScreen.style.display ? "" : "none";
+				break;
+			case "lock":
+				chatLog((hxCameraLocked = !hxCameraLocked) ? "Camera locked." : "Camera unlocked.");
+				break;
+			case "watch":
+				if (cmd[1]) {
+					var pi = Object.values(Object.fromEntries(gameState.remotePlayers.remotePlayers)).find(t => t.info.name == cmd[1]);
+					if (pi) {
+						gameState.cameraController.target = pi.container;
+						chatLog("The camera will be following " + cmd[1] + " now. Please make sure they don't go out of render distance!");
+						return;
+					} else {
+						chatLog("Couldn't find the target player. The camera will be following you now.");
+					}
+				} else {
+					chatLog("The camera will be following you now.");
+				}
+				gameState.cameraController.target = gameState.playerContainer;
+				break;
 			case "noclip":
 				gameState.scenery.staticCollidersList = [];
 				gameState.pumpkinManager.getColliders = () => [];
 				gameState.monsters.buildColliders = () => [];
 
-				chatLog("NoClip enabled. Enter the portal or move to a differnt town to go back to normal.");
+				chatLog("NoClip enabled. Enter a portal or move to a different town to go back to normal.");
 				break;
 			case "zoom":
 				if (!cmd[1]) {
@@ -374,7 +405,7 @@ gameState.trySendChat = function (msg) {
 				break;
 			default:
 				chatLog("Unknown command: " + cmd[0]);
-				chatLog("Available commands: noclip, zoom, hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
+				chatLog("Available commands: ghost, lock, noclip, zoom, hclip, target, mass-inv, players, speed, pumpkin, shop, dance, portal");
 				break;
 		}
 		return;
