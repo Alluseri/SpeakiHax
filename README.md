@@ -6,19 +6,8 @@ Extremely hardcoded because this is mostly for the memes. Can obviously be weapo
 And you can dance in the lobby!
 
 ## Features
-This list is not exhaustive, see **Available Commands** for the full list of features.
-- Grinding bot (hardcoded, you have to edit the src to make sense of it)
-- HUD (toggleable)
-- Mass invite all loaded players to party (broken)
-- Dump all loaded players (no, you cannot hack anyone using this)
-- Speedhack (values over 2 not recommended)
-- Shop anywhere, anytime
-- Horizontal clip
-- Pumpkin anywhere
-- Camera utilities (lock, zoom, watch, viewclip)
-- HWID bypass (for banned accounts)
-
-### Available Commands
+- SpeakiBot: automatically attack enemies, use skills and healing items
+- HWID reset function (for banned accounts, has to be invoked manually)
 - `!ghost` - toggle SpeakiBot HUD
 - `!lock` - lock or unlock the camera ("cinematic view")
 - `!watch [player name]` - make the camera follow another player (`!watch` - follow yourself)
@@ -28,7 +17,7 @@ This list is not exhaustive, see **Available Commands** for the full list of fea
 - `!target [entity]` - set the target mob for SpeakiBot (do `!target` to get the list of available mobs)
 - `!players` - log all players, their levels & IDs to chat
 - `!speed (speed)` - change your movement speed (`1` is the default value)
-- `!joayo` - say joayo (also pretends like you're farming pumpkin patches, but that's fake and doesn't actually count towards anything)
+- `!joayo` - say joayo, anywhere
 - `!shop` - open the Ner shop (should work in Monatium as well, but not tested)
 - `!dance` - start dancing (normally not possible in lobby, this command doesn't require you to have any item)
 - (BROKEN) `!mass-inv (level threshold)` - invite all players in render distance to party (if an argument is specified, only invite players under the specified level threshold)
