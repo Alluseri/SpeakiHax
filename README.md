@@ -49,6 +49,7 @@ This is how it should look like after step 9:
 
 ## My Standpoint
 <img src="https://media1.tenor.com/m/YwaDkCSg1AYAAAAd/israel-human.gif">
+
 - Only goyim will grind manually when botting is an option.
 - If you're a legit player, you're an actual goy.
 - If you slave your life away to grind for \*checks notes\* a vehicle and a drone (oh wait, that's not even in the game yet...), your opinion is literally as irrelevant as it gets
