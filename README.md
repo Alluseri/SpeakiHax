@@ -54,3 +54,12 @@ This is how it should look like after step 9:
 - If you're a legit player, you're an actual goy.
 - If you slave your life away to grind for \*checks notes\* a vehicle and a drone (oh wait, that's not even in the game yet...), your opinion is literally as irrelevant as it gets
 - The game is vibe coded which automatically removes any sort of credibility from the developer (lots of proof for that in the community server)
+
+### On Topic of SpeakiFun
+SpeakiFun accounts are controlled by a [separate script](https://github.com/Alluseri/SpeakiHax/blob/main/speakifun.js) and don't support farm botting. It would be pretty damn stupid to bot on 8 accounts literally named "SpeakiFun1" through "SpeakiFun8", wouldn't it?
+
+You could've figured this out yourself if you looked at the source code, but I'm here aiming to reduce the overall cluelessness of this community.
+
+---
+
+<img src="https://cdn.nest.rip/uploads/96578d20-4e61-4cab-9978-d01789edebbb.png">
