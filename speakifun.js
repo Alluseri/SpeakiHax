@@ -71,7 +71,7 @@ var lunSecondary = SecondaryActions.None;
 var lunTargetPlayer = 0;
 var lunMoveTarget = null;
 var lunTickCount = 0;
-var lunSpeedMultiplier = 1;
+var lunSpeedMultiplier = 1.5;
 
 // clearInterval(FUN_LOOP);
 function tick() {
@@ -179,10 +179,10 @@ gameState.handleChat = function (obm) {
 	lunTickCount = 0; // This breaks #ritual when doing #pat or #jump
 
 	switch (msg) {
-		case "#stop":
+		/*case "#stop":
 			lunAction = Actions.Idle;
 			lunSecondary = SecondaryActions.None;
-			break;
+			break;*/
 		case "#here":
 			lunAction = Actions.Follow;
 			lunTargetPlayer = playerId;
