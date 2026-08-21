@@ -5,6 +5,8 @@ Extremely hardcoded because this is mostly for the memes. Can obviously be weapo
 
 And you can dance in the lobby!
 
+It goes without saying that you should NOT be using this on your main account. Even if you only use it for innocent features like `!dance`, this can still be considered cheating and be punished by the developer. If you've already went as far as to slave a good chunk of your life away on this, at least make sure this isn't what gets you banned.
+
 ## Features
 - SpeakiBot: automatically attack enemies, use skills and healing items
 - HWID reset function (for banned accounts, has to be invoked manually)
