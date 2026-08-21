@@ -39,6 +39,8 @@ Unlike its evil twin, SpeakiMod **is fully safe** to use on your main account si
 13. Paste it into the console (you may have to do the `allow pasting` trick first) and press Enter
 14. You should see the SpeakiMod HUD at the left of the screen - that means it is successfully injected into the game and you can safely close DevTools and start playing the actual game
 
+<img src="https://cdn.nest.rip/uploads/768ef322-bddc-4ad4-a84e-c10ab8d82efc.png">
+
 ### Why so complicated?
 I haven't found a better way to get the game state. That's really it.
 
