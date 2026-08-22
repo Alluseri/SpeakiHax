@@ -57,6 +57,16 @@ This is how it should look like after step 9:
 - If you slave your life away to grind for \*checks notes\* a vehicle and a drone (oh wait, that's not even in the game yet...), your opinion is literally as irrelevant as it gets
 - The game is vibe coded which automatically removes any sort of credibility from the developer (lots of proof for that in the community server)
 
+### Things that are 100% confirmed AI-generated
+- The Elena model (incl. textures) - Claude scratch in model path
+- Ner's face
+- In-game icons (definitely skills, probably items too)
+- Some animations (generated using Hymotion)
+- Localizations (and probably related code - a developer wouldn't normally include the text "GM-only" in the description for an item that he knows is for himself exclusively)
+
+#### Besides
+A really stupid separation between i18n (in the game code) and game info (served thru a GET request). A really stupid decision if I had to say so myself, probably stupid enough that an LLM wouldn't come up with that.
+
 ### On Topic of SpeakiFun
 SpeakiFun accounts are controlled by a [separate script](https://github.com/Alluseri/SpeakiHax/blob/main/speakifun.js) and don't support farm botting. It would be pretty damn stupid to bot on 8 accounts literally named "SpeakiFun1" through "SpeakiFun8", wouldn't it?
 
